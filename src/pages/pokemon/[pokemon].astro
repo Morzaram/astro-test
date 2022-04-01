@@ -1,0 +1,18 @@
+---
+  
+  import {generatePokemonPaths, fetchPokemonData} from '../../data/pokemon.ts'
+  const { pokemon } = Astro.request.params;
+  const poke = await fetchPokemonData(pokemon)  
+  export function  getStaticPaths() {
+    return generatePokemonPaths()
+  }
+
+
+---
+  <h1>{poke.name}</h1>
+  <img src={poke.sprites.back_default} alt={`${poke.name} picture`}>
+  <h2>Skills</h2>
+  <ul>
+    { poke.abilities.map(({ability})=>(
+      <li>{ability.name}</li>)) }
+  </ul>
