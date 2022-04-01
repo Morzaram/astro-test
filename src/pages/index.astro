@@ -1,4 +1,6 @@
 ---
+	  import {generatePokemonPaths, fetchPokemonData} from '../data/pokemon'
+  
 // Style Imports
 import '../styles/global.css';
 import '../styles/home.css';
@@ -12,6 +14,7 @@ import Tour from '../components/Tour.astro';
 // It will run during the build, but never in the browser.
 // All variables are available to use in the HTML template below.
 let title = 'My Astro Site';
+let pokemonList = await generatePokemonPaths()
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -54,6 +57,12 @@ let title = 'My Astro Site';
 		See https://docs.astro.build/core-concepts/component-hydration/ 
 
 		-->
+		<ul>
+		{ pokemonList.map(({params}) => {
+			const p = params.pokemon
+			return	(<li><a href={`/pokemon/${p}`}>{p}</a></li>)
+			}) }
+		</ul>
 
 	</main>
 </body>

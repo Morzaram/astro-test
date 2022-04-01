@@ -11,7 +11,5 @@
   "devDependencies": {
     "astro": "^0.25.4"
   },
-  "dependencies": {
-    "lodash": "^4.17.21"
-  }
+  "dependencies": {}
 }
