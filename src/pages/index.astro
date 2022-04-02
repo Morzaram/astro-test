@@ -16,6 +16,10 @@ import Tour from '../components/Tour.astro';
 let title = 'My Astro Site';
 let pokemonList = await generatePokemonPaths()
 
+const pokeNames = pokemonList.map(({params}) => params.pokemon) 
+
+const fullPokemonData = await Promise.all(pokeNames.map(async(p)=>{return await fetchPokemonData(p)}))
+
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
@@ -37,16 +41,16 @@ let pokemonList = await generatePokemonPaths()
 	</style>
 </head>
 <body>
-	<main>
+	<main class="items-center flex flex-col">
 		<header>
 			<div>
 				<img width="60" height="80" src="/assets/logo.svg" alt="Astro logo">
 				<h1>Welcome to <a href="https://astro.build/">Astro</a></h1>
 			</div>
 		</header>
-
-		<Tour />
-
+		<div class="mb-5">
+			<Tour />
+		</div>
 		<!--
 
 		You can also use imported framework components directly in your markup!
@@ -57,12 +61,20 @@ let pokemonList = await generatePokemonPaths()
 		See https://docs.astro.build/core-concepts/component-hydration/ 
 
 		-->
-		<ul>
-		{ pokemonList.map(({params}) => {
-			const p = params.pokemon
-			return	(<li><a href={`/pokemon/${p}`}>{p}</a></li>)
+	<div class="grid grid-cols-2 sm:grid-cols-3 border rounded border-zinc-300 p-4">
+		{ fullPokemonData.map((pokemon) => {
+			return	(
+				<div class="border rounded border-zinc-300 m-2 w-48 flex flex-col ">
+					<a href={`/pokemon/${pokemon.name}`} >
+						<div class="flex flex-row my-2 p-2 items-center">
+							<img src={pokemon.sprites.front_default} alt={`${pokemon.name} picture`} class="w-12 mx-2 p-1 mr-3 border border-zinc-300 rounded-full"/>
+							<span class="capitalize text-lg">{pokemon.name}</span>
+						</div>
+					</a>
+				</div>
+				)
 			}) }
-		</ul>
+	</div>
 
 	</main>
 </body>

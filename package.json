@@ -9,7 +9,12 @@
     "preview": "astro preview"
   },
   "devDependencies": {
+    "@astrojs/tailwind": "^0.0.2",
+    "@astrojs/turbolinks": "^0.0.2",
     "astro": "^0.25.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23"
+  }
 }
