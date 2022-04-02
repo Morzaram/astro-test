@@ -13,20 +13,20 @@
 
 ---
   <div class="align-top">
-    <a href="/">
-      <div class="absolute top-5 left-5 rounded border-zinc-300 border p-2">
+    <a href="/" class="mb-2">
+      <div class="fixed top-5 left-5 rounded border-zinc-300 border p-2">
         Home
       </div>
     </a>
-    <div class="rounded border-zinc-300 border p-4 h-fit mt-8 md:mt-0">
+    <div class="rounded border-zinc-300 border p-4 h-fit mt-3 md:-mt-4">
       <div class="rounded border-zinc-300 border w-fit h-fit p-2 place-content-center mb-4">
         <h1 class="text-4xl capitalize">{poke.name}</h1>
       </div>
       <div id="image w-475px h-475px">
         <img src={poke.sprites.other["official-artwork"].front_default} alt={`${poke.name} picture`} class="rounded border-zinc-300 border p-2 mb-4">
       </div>
-      <h2 class="text-3xl">Skills</h2>
-      <ul class="border rounded-md border-zinc-300 p-4 w-full">
+      <h2 class="text-3xl mb-2">Skills</h2>
+      <ul class="border rounded-md border-zinc-300 p-4 w-full capitalize space-y-2">
         { poke.abilities.map(({ability})=>(
           <li>{ability.name}</li>)) }
       </ul>
